@@ -128,10 +128,35 @@ const JobPage = ({ deleteJob }) => {
   );
 };
 
+// const jobLoader = async ({ params }) => {
+//   const res = await fetch(`/api/jobs/${params.id}`);
+//   const data = await res.json();
+//   return data;
+// };
+
+// USE THIS WHEN YOU HAVE BACKEND
+// const jobLoader = async ({ params }) => {
+//   const res = await fetch(`/api/jobs/${params.id}`);
+
+//   if (!res.ok) {
+//     throw new Error(`Failed to load job: ${res.status} ${res.statusText}`);
+//   }
+
+//   const data = await res.json();
+//   return data;
+// };
+
+// USE LOCAL JSON DATA (if no backend)
+import jobsData from "../jobs.json";
+
 const jobLoader = async ({ params }) => {
-  const res = await fetch(`/api/jobs/${params.id}`);
-  const data = await res.json();
-  return data;
+  const job = jobsData.jobs.find((job) => job.id === params.id);
+
+  if (!job) {
+    throw new Error("Job not found");
+  }
+
+  return job;
 };
 
 export { JobPage as default, jobLoader };

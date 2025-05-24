@@ -26,6 +26,7 @@ const JobListings = ({ isHome = false }) => {
 
   //   fetchJobs();
   // }, []);
+  
   useEffect(() => {
     setJobs(isHome ? jobsData.jobs.slice(0, 3) : jobsData.jobs);
     setLoading(false);
